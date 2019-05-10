@@ -119,6 +119,7 @@ int main()
                                         info = (le_advertising_info *)offset;
                                         char addr[18];
                                         ba2str(&(info->bdaddr), addr);
+					char rssi = (char)info->data[info->length];
 //                                      printf("%s - RSSI %d\n", addr, (char)info->data[info->length]);
                                         offset = info->data + info->length + 2;
 //                                      printf("data: ");
@@ -157,6 +158,7 @@ int main()
                                                                                 Humidity = 0x06,
                                                                                 Temperature = 0x04,
                                                                         };
+									printf(", \"rssi\": %d", rssi);
                                                                         if( measure_type == TemperatureHumidity && measure_length == 4 && length == 21 ) {
                                                                                 const int temperature = (int(value[17])<<8)+value[16];
                                                                                 const int humidity    = (int(value[19])<<8)+value[18];
@@ -203,5 +205,3 @@ int main()
 
         return 0;
 }
-
-
